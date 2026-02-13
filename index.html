@@ -27,7 +27,12 @@
 
         h1 {
             color: #ff4d6d;
-            font-size: 22px;
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 20px;
+            color: #ff4d6d;
         }
 
         button {
@@ -57,8 +62,9 @@
 
         .emoji {
             position: absolute;
-            font-size: 25px;
+            font-size: 28px;
             animation: fall linear forwards;
+            pointer-events: none;
         }
 
         @keyframes fall {
@@ -90,7 +96,19 @@ yesBtn.onclick = function() {
 
     song.play();
 
-    box.innerHTML = "<h1>Yayyy 🥰💖<br>You made me the happiest person ❤️</h1>";
+    // Change to new romantic screen
+    document.body.innerHTML = `
+        <div style="
+            text-align:center;
+            color:white;
+            font-family:'Segoe UI', sans-serif;
+            padding:30px;
+        ">
+            <h1 style="font-size:32px;">You made my life happiest 🥰</h1>
+            <p style="font-size:24px;">I love you so much ❤️</p>
+        </div>
+        <audio id="loveSong" src="love.mp3" autoplay></audio>
+    `;
 
     startFallingEmojis();
 };
@@ -100,18 +118,23 @@ function startFallingEmojis() {
     const emojis = ["💖","💕","❤️","🥰"];
 
     setInterval(() => {
-        const emoji = document.createElement("div");
-        emoji.classList.add("emoji");
-        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-        emoji.style.left = Math.random() * 100 + "vw";
-        emoji.style.animationDuration = (3 + Math.random() * 3) + "s";
-        document.body.appendChild(emoji);
 
-        setTimeout(() => {
-            emoji.remove();
-        }, 6000);
+        for (let i = 0; i < 5; i++) {   // More emojis per interval
 
-    }, 200);
+            const emoji = document.createElement("div");
+            emoji.classList.add("emoji");
+            emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + "vw";
+            emoji.style.animationDuration = (2 + Math.random() * 3) + "s";
+
+            document.body.appendChild(emoji);
+
+            setTimeout(() => {
+                emoji.remove();
+            }, 5000);
+        }
+
+    }, 150); // Faster rain
 }
 
 noBtn.onmouseover = function() {
