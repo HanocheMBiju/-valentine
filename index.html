@@ -14,6 +14,7 @@
             background: linear-gradient(135deg, #ffdde1, #ee9ca7);
             font-family: 'Segoe UI', sans-serif;
             overflow: hidden;
+            transition: background 1.5s ease;
         }
 
         .box {
@@ -23,6 +24,7 @@
             text-align: center;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             z-index: 10;
+            transition: opacity 1s ease;
         }
 
         h1 {
@@ -68,8 +70,12 @@
         }
 
         @keyframes fall {
-            from { transform: translateY(-10vh); }
-            to { transform: translateY(110vh); }
+            from { transform: translateY(-10vh); opacity:1; }
+            to { transform: translateY(110vh); opacity:0.8; }
+        }
+
+        .romantic-bg {
+            background: radial-gradient(circle at center, #ff9a9e, #fad0c4, #ffdde1);
         }
 
     </style>
@@ -95,12 +101,23 @@ yesBtn.onclick = function() {
 
     song.play();
 
-    box.innerHTML = `
-        <h1>You made my life happiest 🥰</h1>
-        <p>I love you so much ❤️</p>
-    `;
+    // Fade out box
+    box.style.opacity = "0";
 
-    startFallingEmojis();
+    setTimeout(() => {
+
+        document.body.classList.add("romantic-bg");
+
+        box.innerHTML = `
+            <h1 style="font-size:30px;">You made my life happiest 🥰</h1>
+            <p style="font-size:24px;">I love you so much ❤️</p>
+        `;
+
+        box.style.opacity = "1";
+
+        startFallingEmojis();
+
+    }, 1000);
 };
 
 function startFallingEmojis() {
@@ -122,7 +139,7 @@ function startFallingEmojis() {
             emoji.remove();
         }, 7000);
 
-    }, 300); // slower, softer continuous rain
+    }, 300);
 }
 
 </script>
