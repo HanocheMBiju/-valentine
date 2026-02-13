@@ -27,7 +27,7 @@
 
         h1 {
             color: #ff4d6d;
-            font-size: 22px;
+            font-size: 24px;
         }
 
         p {
@@ -61,9 +61,10 @@
 
         .emoji {
             position: absolute;
-            font-size: 25px;
+            font-size: 26px;
             animation: fall linear forwards;
             pointer-events: none;
+            opacity: 0.9;
         }
 
         @keyframes fall {
@@ -107,18 +108,21 @@ function startFallingEmojis() {
     const emojis = ["💖","💕","❤️","🥰"];
 
     setInterval(() => {
+
         const emoji = document.createElement("div");
         emoji.classList.add("emoji");
         emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
         emoji.style.left = Math.random() * 100 + "vw";
-        emoji.style.animationDuration = (3 + Math.random() * 3) + "s";
+        emoji.style.animationDuration = (4 + Math.random() * 3) + "s";
+
         document.body.appendChild(emoji);
 
         setTimeout(() => {
             emoji.remove();
-        }, 6000);
+        }, 7000);
 
-    }, 200);
+    }, 300); // slower, softer continuous rain
 }
 
 </script>
