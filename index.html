@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Will You Be My Valentine?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        .box {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 22px;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.15);
+        }
+
+        #noBtn {
+            background-color: #999;
+            color: white;
+            position: relative;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 25px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            from { transform: translateY(-10vh); }
+            to { transform: translateY(110vh); }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="box" id="mainBox">
+    <h1>Julia, will you be my Valentine? 💖</h1>
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 💔</button>
+</div>
+
+<audio id="loveSong" src="love.mp3"></audio>
+
+<script>
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const song = document.getElementById("loveSong");
+const box = document.getElementById("mainBox");
+
+yesBtn.onclick = function() {
+
+    song.play();
+
+    box.innerHTML = "<h1>Yayyy 🥰💖<br>You made me the happiest person ❤️</h1>";
+
+    startFallingEmojis();
+};
+
+function startFallingEmojis() {
+
+    const emojis = ["💖","💕","❤️","🥰"];
+
+    setInterval(() => {
+        const emoji = document.createElement("div");
+        emoji.classList.add("emoji");
+        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + "vw";
+        emoji.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(emoji);
+
+        setTimeout(() => {
+            emoji.remove();
+        }, 6000);
+
+    }, 200);
+}
+
+noBtn.onmouseover = function() {
+    noBtn.style.position = "absolute";
+    noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
+    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+};
+
+</script>
+
+</body>
+</html>
